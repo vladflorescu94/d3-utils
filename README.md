@@ -2,7 +2,7 @@
 Utility functions for D3 V4
 
 ## Installation
-```javascript
+```bash
 npm install git+ssh://git@github.com:vladflorescu94/d3-utils.git
 ```
 
