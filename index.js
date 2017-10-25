@@ -1,3 +1,9 @@
+import R from 'ramda';
+
+export const selectionOr = R.curry((callback, selection) => {
+  return R.when(sel => sel.empty(), callback, selection);
+});
+
 const isPercentage = v => v.toString().indexOf('%') > -1;
 
 const getMargin = (dim, margin) => {
@@ -36,7 +42,3 @@ export const initSvg = (container, { width, height,  margin: argsMargin }) => {
 
   return { svg, g, chartWidth, chartHeight };
 }
-
-export const selectionOr = R.curry((callback, selection) => {
-  return R.when(sel => sel.empty(), callback, selection);
-});
