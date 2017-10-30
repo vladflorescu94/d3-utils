@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 
 export const selectionOr = R.curry((callback, selection) => {
   return R.when(sel => sel.empty(), callback, selection);
