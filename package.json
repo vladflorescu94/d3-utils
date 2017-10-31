@@ -1,5 +1,5 @@
 {
-  "name": "d3-utils",
+  "name": "@vf/d3-utils",
   "version": "1.0.0",
   "description": "Utility functions for D3.js",
   "main": "index.js",
