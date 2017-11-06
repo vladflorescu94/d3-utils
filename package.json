@@ -1,6 +1,6 @@
 {
   "name": "@vlad-florescu/d3-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Utility functions for D3.js",
   "main": "index.js",
   "repository": "git@github.com:vladflorescu94/d3-utils.git",
