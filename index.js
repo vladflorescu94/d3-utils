@@ -75,58 +75,70 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ramda__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_ramda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_ramda__);
 
 
-const selectionOr = __WEBPACK_IMPORTED_MODULE_0_ramda__["curry"]((callback, selection) => {
-  return __WEBPACK_IMPORTED_MODULE_0_ramda__["when"](sel => sel.empty(), callback, selection);
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-/* harmony export (immutable) */ __webpack_exports__["selectionOr"] = selectionOr;
+exports.initSvg = exports.selectionOr = undefined;
 
+var _ramda = __webpack_require__(1);
 
-const isPercentage = v => v.toString().indexOf('%') > -1;
+var R = _interopRequireWildcard(_ramda);
 
-const getMargin = (dim, margin) => {
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var selectionOr = exports.selectionOr = R.curry(function (callback, selection) {
+  return R.when(function (sel) {
+    return sel.empty();
+  }, callback, selection);
+});
+
+var isPercentage = function isPercentage(v) {
+  return v.toString().indexOf('%') > -1;
+};
+
+var getMargin = function getMargin(dim, margin) {
   if (isPercentage(margin)) {
     return dim * (parseInt(margin, 10) / 100);
   }
   return parseInt(margin, 10);
 };
 
-const computeDimension = (dimension, marginX, marginY) => {
+var computeDimension = function computeDimension(dimension, marginX, marginY) {
   return dimension - getMargin(dimension, marginX) - getMargin(dimension, marginY);
 };
 
-const initSvg = (container, { width, height, margin: argsMargin }) => {
-  if (__WEBPACK_IMPORTED_MODULE_0_ramda__["isNil"](width)) throw new Error('Missing param: width');
-  if (__WEBPACK_IMPORTED_MODULE_0_ramda__["isNil"](height)) throw new Error('Missing param: height');
+var initSvg = exports.initSvg = function initSvg(container, _ref) {
+  var width = _ref.width,
+      height = _ref.height,
+      argsMargin = _ref.margin;
 
-  const margin = __WEBPACK_IMPORTED_MODULE_0_ramda__["merge"]({ top: 0, bottom: 0, left: 0, right: 0 }, argsMargin);
+  if (R.isNil(width)) throw new Error('Missing param: width');
+  if (R.isNil(height)) throw new Error('Missing param: height');
 
-  const svg = selectionOr(() => {
+  var margin = R.merge({ top: 0, bottom: 0, left: 0, right: 0 }, argsMargin);
+
+  var svg = selectionOr(function () {
     return container.append('svg').attr('pointer-events', 'visible');
   }, container.select('svg'));
 
   svg.attr('width', width).attr('height', height);
 
-  const chartHeight = computeDimension(height, margin.top, margin.bottom);
-  const chartWidth = computeDimension(width, margin.left, margin.right);
+  var chartHeight = computeDimension(height, margin.top, margin.bottom);
+  var chartWidth = computeDimension(width, margin.left, margin.right);
 
-  const g = selectionOr(() => {
+  var g = selectionOr(function () {
     return svg.append('g').attr('class', 'main');
   }, svg.select('g.main'));
 
-  g.attr('width', chartWidth).attr('height', chartHeight).attr('transform', `translate(${getMargin(width, margin.left)}, ${getMargin(height, margin.top)})`);
+  g.attr('width', chartWidth).attr('height', chartHeight).attr('transform', 'translate(' + getMargin(width, margin.left) + ', ' + getMargin(height, margin.top) + ')');
 
-  return { svg, g, chartWidth, chartHeight };
+  return { svg: svg, g: g, chartWidth: chartWidth, chartHeight: chartHeight };
 };
-/* harmony export (immutable) */ __webpack_exports__["initSvg"] = initSvg;
-
 
 /***/ }),
 /* 1 */
